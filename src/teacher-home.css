@@ -1,0 +1,228 @@
+:root{
+  --bg: #8FB6FF;
+  --card: #FFFFFF;
+  --cardHead: #B58CFF;
+  --text: #2F2F2F;
+  --sub: #64748B;
+  --bar: #FFFFFF;
+  --coin: #F7B500;
+  --btn: #0FB0A0;
+  --avatar: #A3E887;
+  --shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Layout */
+.th-root{
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+}
+
+/* Sidebar */
+.th-sidebar{
+  width: 64px;
+  background: var(--bar);
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  margin: 10px 0;
+  padding: 18px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 4px 0 16px rgba(0,0,0,0.08);
+}
+.th-sidebar-top{ display:grid; gap:18px; }
+.th-sidebar-bottom{}
+
+/* Icon button (ใส่รูปเองได้) */
+.th-iconbtn{
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.th-iconbtn:hover{ filter: brightness(0.98); }
+.th-icon-placeholder{ font-size: 18px; line-height: 1; }
+.th-plus{ font-size: 20px; }
+.th-more{ font-size: 18px; }
+
+/* Main */
+.th-main{ flex:1; padding:22px 28px; }
+
+/* Top bar */
+.th-topbar{
+  display:flex; justify-content:flex-end; gap:14px; margin-bottom:10px;
+  align-items:center;
+}
+.th-balance{ display:flex; align-items:center; gap:8px; }
+.th-coin{
+  width:26px; height:26px; border-radius:13px;
+  background: var(--coin);
+  display:grid; place-items:center;
+}
+.th-balance-text{ font-size:18px; color:#111; }
+.th-avatar{
+  width:28px; height:28px; border-radius:16px;
+  background: var(--avatar);
+  display:grid; place-items:center;
+  cursor:pointer;
+}
+
+/* Cards grid */
+.th-card-grid{
+  display:flex; flex-wrap:wrap; gap:0;
+}
+.th-card{
+  width: 240px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-right: 24px;
+  margin-bottom: 24px;
+}
+.th-card-head{
+  height: 70px;
+  background: var(--cardHead);
+  color: #fff;
+  display:flex; align-items:center;
+  padding: 0 14px;
+  font-size: 18px; font-weight: 600;
+}
+.th-card-body{
+  height: 90px; background: #F8FAFF; cursor: pointer;
+  padding: 12px; display:flex; align-items:flex-start; color: var(--sub);
+}
+.th-section{ font-size: 13px; }
+.th-card-foot{
+  height: 42px; display:flex; align-items:center;
+  justify-content: space-between; padding: 0 12px 10px;
+}
+.th-card-actions{ display:flex; gap:10px; }
+.th-delete{
+  font-size: 18px; background: transparent; border:0; cursor:pointer; color:#8B8B8B;
+}
+
+/* Modal */
+.th-modal-backdrop{
+  position: fixed; inset: 0; background: rgba(0,0,0,.35);
+  display: grid; place-items: center;
+}
+.th-modal{
+  width: 480px; border-radius: 22px; background: var(--bg);
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.th-modal-title{
+  padding: 18px; text-align: center; color: #1F2937; font-size: 18px; font-weight: 600;
+}
+.th-modal-body{ padding: 0 20px 16px; display:grid; gap:12px; }
+.th-input{
+  background: rgba(255,255,255,.65);
+  border: 0; border-radius: 18px; padding: 12px 16px; font-size: 16px; outline: none;
+}
+.th-modal-actions{ display:grid; grid-template-columns: 1fr 1fr; }
+.th-btn-cancel{
+  background:#fff; border:0; padding:14px 0; font-size:16px; cursor:pointer;
+}
+.th-btn-save{
+  background:#59D36E; color:#0F172A; border:0; padding:14px 0; font-size:16px; cursor:pointer;
+}
+
+/* Responsive เล็กน้อย */
+@media (max-width: 960px){
+  .th-card{ width: 46%; margin-right: 14px; }
+}
+@media (max-width: 640px){
+  .th-card{ width: 100%; margin-right: 0; }
+  .th-modal{ width: 92%; }
+}
+/* ทำให้ main เป็นตำแหน่งอ้างอิงสำหรับ popover */
+.th-main-rel { position: relative; }
+
+/* topbar: มีแค่ avatar ด้านขวา */
+.th-topbar{
+  display:flex; justify-content:flex-end; align-items:center;
+  margin-bottom:10px;
+  gap:12px;
+}
+
+/* avatar เป็นปุ่ม */
+.th-avatar{
+  width:28px; height:28px; border-radius:16px;
+  background:#A3E887; display:grid; place-items:center;
+  cursor:pointer; border:0;
+}
+.th-avatar:hover{ filter: brightness(0.98); }
+
+/* โปรไฟล์ popover */
+.th-profile-backdrop{
+  position:absolute; inset:0;  /* ครอบเฉพาะพื้นที่ main */
+  background: transparent;     /* ไว้คลิกเพื่อปิด */
+}
+.th-profile-pop{
+  position:absolute; top:6px; right:0;
+  width: 220px;
+  background:#fff; border-radius:14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  padding: 14px;
+  z-index: 5;
+}
+.th-profile-title{
+  font-weight:600; color:#1F2937; margin-bottom:8px; text-align:left;
+}
+.th-profile-row{
+  font-size:14px; color:#475569; margin-bottom:12px;
+}
+.th-btn-logout{
+  width:100%;
+  background:#FF5B5B;  /* แดง */
+  color:#fff;
+  border:0;
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:16px; font-weight:600;
+  cursor:pointer;
+}
+.th-btn-logout:hover{ filter: brightness(0.96); }
+/* ตำแหน่งอ้างอิงรวม */
+.th-root-rel { position: relative; }
+
+/* === Add (+) dropdown === */
+.th-add-wrap { position: relative; }
+.th-add-pop{
+  position: absolute;
+  left: 76px;           /* ให้ยื่นออกจากแถบซ้ายเหมือนภาพ */
+  top: 0;               /* จะยึดกับตำแหน่งปุ่ม + พอดี */
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 14px 28px rgba(0,0,0,.14);
+  padding: 10px 0;
+  width: 180px;
+  z-index: 6;
+}
+.th-add-item{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:10px 16px;
+  background:transparent;
+  border:0;
+  font-size:14px;
+  color:#111827;
+  cursor:pointer;
+}
+.th-add-item:hover{ background:#F2F6FF; }
+.th-add-backdrop{
+  position: fixed; inset: 0;
+  background: transparent; /* แค่ไว้รับคลิก */
+  z-index: 5;
+}
+
+/* ขนาดโมดัลเล็กของ Join */
+.th-modal-sm{ width: 360px; }
+
+/* (ถ้าขาดอยู่) ให้ main เป็น relative สำหรับโปรไฟล์ popover */
+.th-main-rel { position: relative; }
