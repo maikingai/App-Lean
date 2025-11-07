@@ -226,3 +226,111 @@
 
 /* (ถ้าขาดอยู่) ให้ main เป็น relative สำหรับโปรไฟล์ popover */
 .th-main-rel { position: relative; }
+/* ---- Fluid card for detail pages ---- */
+.th-card--fluid {
+  width: 100% !important;   /* ทับ 240px ของ .th-card */
+  max-width: none !important;
+}
+
+/* ถ้าอยากให้ margin/padding ดูโปร่งขึ้นในหน้า detail */
+.th-card--fluid.padded {
+  padding: 16px;
+  border-radius: 16px;
+}
+
+/* FullCalendar cell tune */
+.fc .fc-daygrid-day-frame { padding: 6px; }
+.fc .fc-daygrid-day { border-radius: 12px; }
+.fc .fc-daygrid-day-top { justify-content: center; font-weight: 600; }
+.fc .fc-daygrid-day { border: none !important; }
+.fc .fc-daygrid-day-number { color:#1f2937; }
+.fc-mycell { background:#d9c8ff33; border-radius:12px; }
+.fc .fc-day-today { background:#e9e9ee !important; border-radius:12px; }
+.fc .fc-toolbar-title { font-weight:700; }
+
+/* text-only buttons */
+.th-btn-link{
+  background: transparent;
+  border: 0;
+  padding: 0;               /* เอาพื้นหลัง/แคปซูลออก */
+  color: #111827;           /* สีตัวอักษร */
+  font-weight: 600;
+  cursor: pointer;
+}
+.th-btn-link:hover{ text-decoration: underline; }
+.th-btn-link:focus-visible{
+  outline: 2px solid #93c5fd;  /* โฟกัสสำหรับคีย์บอร์ด */
+  outline-offset: 2px;
+}
+
+/* ถ้าอยากเน้น Save ให้ดูเด่นขึ้น (เฉพาะตัวอักษร) */
+.th-btn-link--emph{ color: #059669; } /* เขียวเฉดเดียวกับเดิม แต่เป็นตัวหนังสือ */
+/* ===== Calendar modal layering ===== */
+.th-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.38);
+  z-index: 10000;            /* สูงกว่า FullCalendar ทุกชั้น */
+  backdrop-filter: blur(1.5px);
+}
+
+.th-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10001;            /* โมดัลต้องสูงกว่าฉากหลัง */
+}
+
+/* ตอนเปิดโมดัล: เบลอและปิดการคลิกในปฏิทิน */
+.cal-wrap.is-modal .fc {
+  filter: blur(2px);
+  pointer-events: none;      /* กันคลิกทะลุ */
+}
+
+/* ลดชั้น event ของ FullCalendar ไม่ให้ลอยทับโมดัล */
+.fc,
+.fc .fc-view-harness,
+.fc .fc-daygrid-event,
+.fc .fc-daygrid-event-harness {
+  position: relative;
+  z-index: 1;
+}
+
+/* ปุ่มบันทึก/เพิ่ม (เดิมเป็นสีเขียว) → เปลี่ยนเป็นฟ้า/ม่วง */
+.th-btn-save {
+  color: #fff !important;
+  background: linear-gradient(180deg, #6366f1, #4f46e5) !important; /* indigo */
+  border: 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 22px rgba(79,70,229,.35) !important;
+  cursor: pointer;
+  transition: filter .2s ease, transform .06s ease;
+}
+.th-btn-save:hover { filter: brightness(1.05); }
+.th-btn-save:active { transform: translateY(1px); }
+
+/* ปุ่ม cancel ให้เป็นเทาอ่อนสวย ๆ (ถ้าต้องการ) */
+.th-btn-cancel {
+  color: #111827 !important;
+  background: linear-gradient(180deg,#ffffff,#f3f4f6) !important;
+  border: 1px solid #e5e7eb !important;
+  padding: 10px 16px !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 16px rgba(15,23,42,.10) !important;
+  cursor: pointer;
+}
+.th-btn-cancel:hover { filter: brightness(1.03); }
+
+/* ปุ่ม delete สีแดงนุ่ม */
+.th-btn-danger {
+  color: #fff !important;
+  background: linear-gradient(180deg,#ef4444,#dc2626) !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 22px rgba(239,68,68,.35) !important;
+}

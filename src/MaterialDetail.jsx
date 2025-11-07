@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './teacher-home.css'
 
-export default function AssignmentDetail() {
+export default function MaterialDetail() {
   const navigate = useNavigate()
-  const { assignmentId } = useParams()
+  const { materialId } = useParams()
 
   // ===== Profile / Logout =====
   const [showProfile, setShowProfile] = useState(false)
@@ -20,14 +20,15 @@ export default function AssignmentDetail() {
     </button>
   )
 
-  // ====== ข้อมูลโพสต์ ======
-  const [postTitle, setPostTitle] = useState(`Matrix (Assignment #${assignmentId})`)
+  // ====== ข้อมูลโพสต์ (Material) ======
+  const [postTitle, setPostTitle] = useState(`Matrix (Material #${materialId})`)
   const [postDesc, setPostDesc]   = useState('................................')
-  const [dueText] = useState('10 Oct. 2025, 23:59')
+  const [postedMeta] = useState('Thanchanok Konsuag · 26 Sep. 2025')
 
-  const [pdfs] = useState([{ name: 'Matrix.pdf', url: '#' }])
-  const [yts]  = useState([
-    { title: 'Matrix', url: 'https://www.youtube.com/live/qVt_fdsvHqw?si=-KDf46PEraWlf3Zo' }
+  // แนบไฟล์ตัวอย่าง (อ่านอย่างเดียว)
+  const [pdfs] = useState([{ name: 'Matrix_Notes.pdf', url: '#' }])
+  const [links] = useState([
+    { title: 'Matrix Lecture (YouTube)', url: 'https://www.youtube.com/live/qVt_fdsvHqw?si=-KDf46PEraWlf3Zo' }
   ])
 
   // ====== คอมเมนต์ ======
@@ -113,11 +114,11 @@ export default function AssignmentDetail() {
           ))}
         </div>
 
-        {/* ===== การ์ดโพสต์ (ไม่ใช้ padding ที่กรอบนอก) ===== */}
+        {/* ===== การ์ดโพสต์ (Material) ===== */}
         <section
           className="th-card th-card--fluid"
           style={{
-            padding: 0,                 // ❌ ไม่ใช้ padding
+            padding: 0,
             borderRadius: 16,
             width: '97%',
             maxWidth: 980,
@@ -125,29 +126,26 @@ export default function AssignmentDetail() {
             display: 'grid',
             gridTemplateColumns: '1fr auto',
             alignItems: 'stretch',
-            overflow: 'hidden'          // ✅ กันเนื้อหาไหลออก/ตกการ์ด
+            overflow: 'hidden'
           }}
         >
-          {/* กล่องคอนเทนต์ด้านซ้าย */}
+          {/* ซ้าย: เนื้อหาหลัก */}
           <div style={{
             width: '100%',
             minHeight: '100%',
             display: 'grid',
             gridAutoRows: 'auto',
             gap: 12,
-            padding: 16,                // ✅ ใช้ padding ภายในแทน margin
+            padding: 16,
             boxSizing: 'border-box',
             alignItems: 'start'
           }}>
             {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 10, background: '#E9F0FF', display: 'grid', placeItems: 'center' }}>📄</div>
+              <div style={{ width: 32, height: 32, borderRadius: 10, background: '#E9F0FF', display: 'grid', placeItems: 'center' }}>📚</div>
               <div>
                 <div style={{ fontWeight: 700, color: '#0f172a' }}>{postTitle}</div>
-                <div style={{ fontSize: 12, color: '#6b7c93' }}>
-                  Thanchanok Konsuag · 3 Oct. 2025, 23:59
-                </div>
-                <div style={{ fontSize: 12, color: '#6b7c93', marginTop: 4 }}>10 points</div>
+                <div style={{ fontSize: 12, color: '#6b7c93' }}>{postedMeta}</div>
               </div>
             </div>
 
@@ -181,8 +179,8 @@ export default function AssignmentDetail() {
                 </div>
               ))}
 
-              {yts.map((v, i) => (
-                <div key={`yt-${i}`} className="th-card" style={{ width: 280, height: 88, borderRadius: 14, boxShadow: 'none', background: '#f8fbff' }}>
+              {links.map((v, i) => (
+                <div key={`link-${i}`} className="th-card" style={{ width: 280, height: 88, borderRadius: 14, boxShadow: 'none', background: '#f8fbff' }}>
                   <a
                     href={v.url}
                     target="_blank"
@@ -200,10 +198,10 @@ export default function AssignmentDetail() {
                       paddingRight: 10
                     }}
                   >
-                    <div style={{ width: 96, height: 52, borderRadius: 8, background: '#e8eefc', display: 'grid', placeItems: 'center', fontSize: 12 }}>YouTube</div>
+                    <div style={{ width: 96, height: 52, borderRadius: 8, background: '#e8eefc', display: 'grid', placeItems: 'center', fontSize: 12 }}>Link</div>
                     <div>
                       <div style={{ fontSize: 12, color: '#111827' }}>{v.title}</div>
-                      <div style={{ fontSize: 11, color: '#7A8BA6' }}>Link</div>
+                      <div style={{ fontSize: 11, color: '#7A8BA6' }}>External</div>
                     </div>
                   </a>
                 </div>
@@ -217,7 +215,7 @@ export default function AssignmentDetail() {
             </div>
           </div>
 
-          {/* ฝั่งขวา: due + เมนู ⋯ */}
+          {/* ขวา: เมนู ⋯ (ไม่มี Due สำหรับ Material) */}
           <div style={{
             width: 220,
             borderLeft: '1px solid rgba(0,0,0,.06)',
@@ -256,9 +254,6 @@ export default function AssignmentDetail() {
                   </div>
                 </>
               )}
-            </div>
-            <div style={{ fontSize: 12, color: '#6b7c93', padding: '0 16px 16px 16px', alignSelf: 'end', justifySelf: 'end', textAlign: 'right' }}>
-              <strong>Due</strong> {dueText}
             </div>
           </div>
         </section>
